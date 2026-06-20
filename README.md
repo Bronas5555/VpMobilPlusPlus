@@ -17,3 +17,7 @@ iOS and Web Project's are available, but aren't tested.
 
 # **Security Warning**
 This app stores username and password in plain text on your local storage.
+
+## Gallery
+![Mobile View](https://imgur.com/a/M0QX2KB)
+![Desktop View](
