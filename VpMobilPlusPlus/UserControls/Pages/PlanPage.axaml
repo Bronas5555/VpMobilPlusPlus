@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localControls="clr-namespace:VpMobilPlusPlus.UserControls.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VpMobilPlusPlus.UserControls.Pages.PlanPage">
+    <Grid Margin="5" RowDefinitions="Auto * Auto">
+        <Grid Grid.Row="0" DockPanel.Dock="Top" ColumnDefinitions="Auto, *, Auto" Margin="0 0 0 5">
+            <Button 
+                Grid.Column="0" 
+                Name="PrevButton" 
+                VerticalAlignment="Top"
+                Width="35"
+                Height="35">
+                <TextBlock
+                    FontSize="24"
+                    Text="-"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"></TextBlock>
+            </Button>
+            <DockPanel Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock Text="23.12. - 16. 07" DockPanel.Dock="Top" HorizontalAlignment="Center" Name="DateBlock" FontSize="15"></TextBlock>
+                <TextBlock Text="5A" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Name="ClassNameBlock" FontSize="15"></TextBlock>
+            </DockPanel>
+            <Button 
+                Grid.Column="2" 
+                Name="NextButton" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right"
+                Width="35"
+                Height="35">
+                <TextBlock
+                    FontSize="24"
+                    Text="+"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"></TextBlock>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="*, *, *, *, *" Name="DaysGrid" DockPanel.Dock="Top" VerticalAlignment="Stretch">
+            
+        </Grid>
+        <localControls:ToolBar 
+            Grid.Row="2" 
+            DockPanel.Dock="Bottom"
+            VerticalAlignment="Bottom"></localControls:ToolBar>
+    </Grid>
+</UserControl>

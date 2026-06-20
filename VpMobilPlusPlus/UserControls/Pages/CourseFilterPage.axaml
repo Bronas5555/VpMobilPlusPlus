@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:VpMobilPlusPlus.UserControls.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VpMobilPlusPlus.UserControls.Pages.CourseFilterPage">
+    <Grid
+        RowDefinitions="Auto, *, Auto"
+        Margin="5">
+        <Grid Grid.Row="0" ColumnDefinitions="*, *, *" DockPanel.Dock="Top">
+            <Button 
+                Grid.Column="0"
+                Name="BackButton"
+                VerticalAlignment="Top">Back</Button>
+            <TextBlock 
+                Grid.Column="1" 
+                Text="Courses"
+                HorizontalAlignment="Center"
+                FontSize="28"></TextBlock>
+        </Grid>
+        
+        <ScrollViewer Grid.Row="1">
+            <Grid
+                Margin="10"
+                ColumnDefinitions="*, *, *"
+                Name="CourseGrid">
+            
+            </Grid>
+        </ScrollViewer>
+        <local:ToolBar Grid.Row="2" DockPanel.Dock="Bottom"></local:ToolBar>
+    </Grid>
+</UserControl>

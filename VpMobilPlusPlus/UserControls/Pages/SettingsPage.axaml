@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VpMobilPlusPlus.UserControls.Pages.SettingsPage">
+    <Grid 
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+        Margin="5">
+        <Grid
+            Margin="5"
+            ColumnDefinitions="Auto, *"
+            Grid.Row="0">
+            <Button 
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                Name="BackButton">Back</Button>
+            <TextBlock
+                Grid.Column="1"
+                Text="Settings"
+                FontSize="28"
+                HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+        
+        <TextBox
+            Grid.Row="1"
+            PlaceholderText="School Number..."
+            Margin="5"
+            Name="SchoolNumberBox"></TextBox>
+        
+        <TextBox
+            Margin="5"
+            Grid.Row="2"
+            PlaceholderText="Username..."
+            Name="UserNameBox"></TextBox>
+        <TextBox
+            Margin="5"
+            Grid.Row="3"
+            PlaceholderText="Password..."
+            PasswordChar="*"
+            Name="PasswordBox"></TextBox>
+        
+    </Grid>
+</UserControl>

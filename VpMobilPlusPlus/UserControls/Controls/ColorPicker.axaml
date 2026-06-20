@@ -1,0 +1,103 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+             x:Class="VpMobilPlusPlus.UserControls.Controls.ColorPicker">
+    <Grid
+        Margin="5"
+        RowDefinitions="*, Auto, Auto, Auto, Auto">
+        <Rectangle
+            Fill="Green"
+            Grid.Row="0"
+            Name="ColorPreviewRect"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"></Rectangle>
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="Auto, *, Auto">
+            <TextBlock 
+                Grid.Column="0"
+                Text="R"
+                VerticalAlignment="Center"
+                Margin="5 0 5 0"></TextBlock>
+            <Slider
+                Minimum="0"
+                Maximum="255"
+                Name="RedSlider"
+                Margin="5 0 5 0"
+                Grid.Column="1"></Slider>
+            <TextBlock
+                Name="RedValueBlock"
+                Grid.Column="2" 
+                Text="255"
+                Margin="5 0 5 0"
+                VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="Auto, *, Auto">
+            <TextBlock 
+                Grid.Column="0"
+                Text="G"
+                VerticalAlignment="Center"
+                Margin="5 0 5 0"></TextBlock>
+            <Slider
+                Value="150"
+                Minimum="0"
+                Maximum="255"
+                Name="GreenSlider"
+                Margin="5 0 5 0"
+                Grid.Column="1"></Slider>
+            <TextBlock
+                Name="GreenValueBlock"
+                Grid.Column="2" 
+                Text="255"
+                Margin="5 0 5 0"
+                VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid
+            Grid.Row="3"
+            ColumnDefinitions="Auto, *, Auto">
+            <TextBlock 
+                Grid.Column="0"
+                Text="B"
+                VerticalAlignment="Center"
+                Margin="5 0 5 0"></TextBlock>
+            <Slider
+                Minimum="0"
+                Maximum="255"
+                Name="BlueSlider"
+                Margin="5 0 5 0"
+                Grid.Column="1"></Slider>
+            <TextBlock
+                Name="BlueValueBlock"
+                Grid.Column="2" 
+                Text="255"
+                Margin="5 0 5 0"
+                VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid
+            Grid.Row="4"
+            ColumnDefinitions="Auto, *, Auto">
+            <TextBlock 
+                Grid.Column="0"
+                Text="A"
+                VerticalAlignment="Center"
+                Margin="5 0 5 0"></TextBlock>
+            <Slider
+                Minimum="0"
+                Maximum="255"
+                Name="AlphaSlider"
+                Value="255"
+                Margin="5 0 5 0"
+                Grid.Column="1"></Slider>
+            <TextBlock 
+                Grid.Column="2" 
+                Text="255"
+                Margin="5 0 5 0"
+                VerticalAlignment="Center"
+                Name="AlphaValueBlock"></TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

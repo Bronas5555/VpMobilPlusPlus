@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VpMobilPlusPlus.UserControls.Controls.ClassSelectionPinnableElement">
+    <Grid 
+        Margin="1"
+        ColumnDefinitions="*, Auto">
+        <Button Grid.Column="0" HorizontalAlignment="Stretch" Margin="0 0 5 0" Name="LoadPlanButton">
+            <DockPanel>
+                <TextBlock 
+                    Name="ClassNameBlock" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"></TextBlock>
+                <CheckBox Name="PinnedBox" HorizontalAlignment="Right"></CheckBox>
+            </DockPanel>
+            
+        </Button>
+        
+    </Grid>
+</UserControl>

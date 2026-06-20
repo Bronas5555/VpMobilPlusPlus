@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="VpMobilPlusPlus.Android/VpMobilPlusPlus.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="VpMobilPlusPlus.Browser/VpMobilPlusPlus.Browser.csproj" />
+  <Project Path="VpMobilPlusPlus.Desktop/VpMobilPlusPlus.Desktop.csproj" />
+  <Project Path="VpMobilPlusPlus.iOS/VpMobilPlusPlus.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="VpMobilPlusPlus/VpMobilPlusPlus.csproj" />
+</Solution>

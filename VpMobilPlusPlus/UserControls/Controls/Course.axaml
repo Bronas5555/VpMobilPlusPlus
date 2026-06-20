@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="80"
+             x:Class="VpMobilPlusPlus.UserControls.Controls.Course">
+    <Border Background="rgb(35, 35, 35)" CornerRadius="4" BorderBrush="Black" BorderThickness="1 1 1 0" Name="Background">
+        <ScrollViewer>
+            <Grid
+                RowDefinitions="Auto, *">
+                <Grid ColumnDefinitions="*, *, *" Margin="5" DockPanel.Dock="Top">
+                    <TextBlock 
+                        Grid.Column="0" 
+                        Name="CourseNameBlock" 
+                        TextWrapping="Wrap"
+                        FontSize="16">Ma</TextBlock>
+                    <TextBlock 
+                        Grid.Column="1" 
+                        Name="CourseTeacherBlock" 
+                        TextWrapping="Wrap"
+                        FontSize="16">Höw</TextBlock>
+                    <TextBlock 
+                        Grid.Column="2" 
+                        Name="CourseRoomBlock" 
+                        TextWrapping="Wrap"
+                        FontSize="16">C031</TextBlock>
+                </Grid>
+                <TextBlock
+                    Grid.Row="1"
+                    Text=""
+                    FontSize="16"
+                    VerticalAlignment="Bottom" 
+                    Margin="5"
+                    Foreground="Red"
+                    TextWrapping="Wrap"
+                    Name="InfoBlock"></TextBlock>
+            </Grid>
+        </ScrollViewer>
+        
+    </Border>
+    
+</UserControl>
