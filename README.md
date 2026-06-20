@@ -5,8 +5,8 @@ A alternative client for the VpMobil Application written with [Avalonia UI](http
 -Android
 
 ## Features
--Viewing of Plans
--Portrait / landscape support
--Filtering of subjects
--Custom Colors for subjects
+- Viewing of Plans
+- Portrait / landscape support
+- Filtering of subjects
+- Custom Colors for subjects
 
