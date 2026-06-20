@@ -1,13 +1,12 @@
 # VpMobil++
 A alternative client for the VpMobil Application written with [Avalonia UI](https://avaloniaui.net/)
-##Supported Plattforms
+## Supported Plattforms
 -Desktop (Win / Linux)
 -Android
 
-##Features
+## Features
 -Viewing of Plans
 -Portrait / landscape support
 -Filtering of subjects
 -Custom Colors for subjects
 
-##
