@@ -2,7 +2,8 @@
 A alternative client for the VpMobil Application written with [Avalonia UI](https://avaloniaui.net/) in C#.
 
 ## Supported Plattforms
-- Desktop (Win / Linux)
+- Windows 64
+- Linux 64
 - Android
 
 iOS and Web Project's are available, but aren't tested.
