@@ -19,5 +19,5 @@ iOS and Web Project's are available, but aren't tested.
 This app stores username and password in plain text on your local storage.
 
 ## Gallery
-![Mobile View](https://imgur.com/a/M0QX2KB)
+![Mobile View](https://imgur.com/a/6FMzeih)
 ![Desktop View](
