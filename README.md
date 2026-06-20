@@ -13,5 +13,5 @@ iOS and Web Project's are available, but aren't tested.
 - Filtering of subjects
 - Custom Colors for subjects
 
-# ** Security Warning**
+# **Security Warning**
 This app stores username and password in plain text on your local storage.
