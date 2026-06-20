@@ -20,4 +20,4 @@ This app stores username and password in plain text on your local storage.
 
 ## Gallery
 ![Mobile View](https://i.imgur.com/rQGKaGP.jpeg)
-![Desktop View](
+![Desktop View](https://i.imgur.com/rdWyLEJ.png)
