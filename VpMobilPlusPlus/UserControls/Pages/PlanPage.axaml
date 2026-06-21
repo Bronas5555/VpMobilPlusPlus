@@ -38,7 +38,11 @@
             </Button>
         </Grid>
         <Grid Grid.Row="1" ColumnDefinitions="*, *, *, *, *" Name="DaysGrid" DockPanel.Dock="Top" VerticalAlignment="Stretch">
-            
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer
+                    CanHorizontallySwipe="True"
+                    CanVerticallySwipe="False"></SwipeGestureRecognizer>
+            </Grid.GestureRecognizers>
         </Grid>
         <localControls:ToolBar 
             Grid.Row="2" 

@@ -8,14 +8,13 @@
     <Grid
         Margin="5"
         RowDefinitions="Auto, *, Auto">
-        <Grid Grid.Row="0" ColumnDefinitions="*, *, *" Name="ListGrid">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Name="ListGrid">
             <Button
                 Name="BackButton"
                 Grid.Column="0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top">Back</Button>
             <TextBlock
-                Name="Temp"
                 Grid.Column="1"
                 Text="Class Colors"
                 FontSize="28"

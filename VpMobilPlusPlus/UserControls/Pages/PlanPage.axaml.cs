@@ -5,6 +5,8 @@ using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Input.GestureRecognizers;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.Markup.Xaml;
@@ -23,6 +25,9 @@ public partial class PlanPage : UserControl
     public int _curClassIndex;
     private List<CourseAndTeacher> _courses = new List<CourseAndTeacher>();
     public bool isSingleColumn = false;
+
+    private double width = -1;
+    private double height = -1;
     
     public PlanPage()
     {
@@ -64,17 +69,71 @@ public partial class PlanPage : UserControl
                 }
             }
         };
-        Loaded += (sender, args) =>
+
+        LayoutUpdated += (sender, args) =>
         {
             var topLevel = TopLevel.GetTopLevel(this);
 
             if (topLevel != null)
             {
-                var size = topLevel.ClientSize;
-                UpdateViewState(size);
-                CourseColorSelectionPage.UpdateLayout();
+                var size = topLevel.Bounds.Size;
+
+
+
+                if (width != size.Width || height != size.Height)
+                {
+                    width = size.Width;
+                    height = size.Height;
+                    
+                    UpdateViewState(new Size(width, height));
+                }
             }
         };
+
+        DeviceResolution.Changed += (width, height) =>
+        {
+            UpdateViewState(new Size(width, height)); 
+            Console.WriteLine("Updated View From Orientation Change " + width + " " + height);
+            
+        };
+
+        DaysGrid.AddHandler(InputElement.SwipeGestureEndedEvent, (object? sender, SwipeGestureEndedEventArgs args) =>
+        {
+            if (args.Velocity.X < 0)
+            {
+                if(!isSingleColumn) ShowPrevWeek(sender, args);
+                else
+                {
+                    if (singleColumnDayOffset > 0)
+                    {
+                        singleColumnDayOffset -= 1;
+                        LoadWeekByDateAndClass(_curWeek, _curClassIndex);
+                    }
+                    else
+                    {
+                        singleColumnDayOffset = 4;
+                        ShowPrevWeek(sender, args);
+                    }
+                }
+            }
+            else
+            {
+                if(!isSingleColumn) ShowNextWeek(sender, args);
+                else
+                {
+                    if (singleColumnDayOffset < 4)
+                    {
+                        singleColumnDayOffset += 1;
+                        LoadWeekByDateAndClass(_curWeek, _curClassIndex);
+                    }
+                    else
+                    {
+                        singleColumnDayOffset = 0;
+                        ShowNextWeek(sender, args);
+                    }
+                }
+            }
+        });
     }
 
     public static void LoadWeekByDateAndClass(DateOnly date, int classIndex)
@@ -190,7 +249,9 @@ public partial class PlanPage : UserControl
     public static void UpdateViewState(Size size)
     {
         bool oldState = Instance.isSingleColumn;
-        if (size.Width < 800)
+        float ratio = (float)(size.Width / size.Height);
+        
+        if (ratio < 1f)
         {
             //Single column
             Instance.isSingleColumn = true;
@@ -207,8 +268,10 @@ public partial class PlanPage : UserControl
         if (oldState != Instance.isSingleColumn)
         {
             ReloadCurrentWeek();
+            CourseColorSelectionPage.UpdateLayout();
         }
     }
+    
 }
 
 public class CourseAndTeacher

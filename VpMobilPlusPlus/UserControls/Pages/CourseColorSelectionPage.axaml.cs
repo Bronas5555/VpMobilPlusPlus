@@ -46,7 +46,13 @@ public partial class CourseColorSelectionPage : UserControl
         bool isSingleColumn = PlanPage.Instance.isSingleColumn;
         if (isSingleColumn)
         {
-            instance.ColorGrid.ColumnDefinitions = new ColumnDefinitions("");
+            Grid.SetRow(instance.ListScrollViewer, 0);
+            Grid.SetColumn(instance.ListScrollViewer, 0);
+
+            Grid.SetRow(instance.CourseColorPicker, 0);
+            Grid.SetColumn(instance.CourseColorPicker, 0);
+            
+            instance.ColorGrid.ColumnDefinitions = new ColumnDefinitions("*");
             instance.ColorGrid.RowDefinitions = new RowDefinitions("*, *");
             
             Grid.SetRow(instance.ListScrollViewer, 0);
@@ -54,8 +60,14 @@ public partial class CourseColorSelectionPage : UserControl
         }
         else
         {
+            Grid.SetRow(instance.ListScrollViewer, 0);
+            Grid.SetColumn(instance.ListScrollViewer, 0);
+
+            Grid.SetRow(instance.CourseColorPicker, 0);
+            Grid.SetColumn(instance.CourseColorPicker, 0);
+            
             instance.ColorGrid.ColumnDefinitions = new ColumnDefinitions("*, *");
-            instance.ColorGrid.RowDefinitions = new RowDefinitions("");
+            instance.ColorGrid.RowDefinitions = new RowDefinitions("*");
             
             Grid.SetColumn(instance.ListScrollViewer, 0);
             Grid.SetColumn(instance.CourseColorPicker, 1);
