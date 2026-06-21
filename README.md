@@ -6,7 +6,7 @@ A alternative client for the VpMobil Application written with [Avalonia UI](http
 - Linux 64
 - Android
 
-iOS and Web-Assembly project's are available, but aren't tested.
+iOS and Web-Assembly projects are available, but aren't tested.
 
 
 ## Features
