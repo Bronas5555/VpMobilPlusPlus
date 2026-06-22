@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -93,13 +94,12 @@ public partial class PlanPage : UserControl
         DeviceResolution.Changed += (width, height) =>
         {
             UpdateViewState(new Size(width, height)); 
-            Console.WriteLine("Updated View From Orientation Change " + width + " " + height);
             
         };
 
         DaysGrid.AddHandler(InputElement.SwipeGestureEndedEvent, (object? sender, SwipeGestureEndedEventArgs args) =>
         {
-            if (Math.Abs(args.Velocity.Y) > 20) return;
+            if (Math.Abs(args.Velocity.Y) > Math.Abs(args.Velocity.X)) return;
             
             if (args.Velocity.X < 0)
             {
