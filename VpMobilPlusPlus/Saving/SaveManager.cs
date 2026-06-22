@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Media;
+using Plugin.SecureStorage;
+using Plugin.SecureStorage.Abstractions;
 using VpMobilPlusPlus.UserControls.Pages;
 
 namespace VpMobilPlusPlus.Saving;
@@ -19,7 +22,12 @@ public static class SaveManager
 
     private static readonly string appFolderName = "VpMobilPlusPlus";
     private static readonly string fileName = "settings.json";
+    private static readonly string secureStorageSchoolNumber = "schoolNumber";
+    private static readonly string secureStorageUsername = "username";
+    private static readonly string secureStoragePassword = "password";
+    
     private static bool hasLoaded = false;
+    
 
     private static readonly JsonSerializerOptions jsonOptions = new()
     {
@@ -39,15 +47,34 @@ public static class SaveManager
         Directory.CreateDirectory(appFolder);
 
         string saveFile = Path.Combine(appFolder, fileName);
+
+        bool cred = SaveCredentials();
         
-        var data = new VpMobilPlusPlusSaveData(
-            CourseFilters,
-            ClassList,
-            CourseColorSelectionPage.courseColors,
-            schoolNumber,
-            username,
-            password
-        );
+        Console.WriteLine("Credentials: " + cred);
+        VpMobilPlusPlusSaveData data;
+        if (cred)
+        {
+            data = new VpMobilPlusPlusSaveData(
+                CourseFilters,
+                ClassList,
+                CourseColorSelectionPage.courseColors,
+                -1,
+                "",
+                ""
+            );
+        }
+        else
+        {
+            data = new VpMobilPlusPlusSaveData(
+                CourseFilters,
+                ClassList,
+                CourseColorSelectionPage.courseColors,
+                schoolNumber,
+                username,
+                password
+            );
+        }
+        
 
         await using FileStream stream = new FileStream(
             saveFile,
@@ -99,6 +126,17 @@ public static class SaveManager
 
         if (data == null)
             return;
+        
+        string secureSchoolNumber = CrossSecureStorage.Current.GetValue("schoolNumber");
+        string secureUsername = CrossSecureStorage.Current.GetValue("username");
+        string securePassword = CrossSecureStorage.Current.GetValue("password");
+
+        if (CrossSecureStorage.IsSupported)
+        {
+            data.SchoolNumber = int.Parse(secureSchoolNumber);
+            data.Username = secureUsername;
+            data.Password = securePassword;
+        }
 
 
         if (data.CourseFilters != null)
@@ -134,21 +172,16 @@ public static class SaveManager
         return schoolNumber;
     }
 
-    public static void DeleteAllData()
+    private static bool SaveCredentials()
     {
-        string settingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        string appFolder = Path.Combine(settingsFolder, appFolderName);
-
-        string settings = Path.Combine(appFolder, fileName);
-        try
-        {
-            File.Delete(settings);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        //TODO: Linux Secure Storage Solution
+        if (OperatingSystem.IsLinux()) return false;
         
+        bool nmb = CrossSecureStorage.Current.SetValue(secureStorageSchoolNumber, schoolNumber.ToString());
+        bool name = CrossSecureStorage.Current.SetValue(secureStorageUsername, username);
+        bool pwd = CrossSecureStorage.Current.SetValue(secureStoragePassword, password);
+        Console.WriteLine("Saving Creds");
+        return nmb && name && pwd;
     }
 }
 
