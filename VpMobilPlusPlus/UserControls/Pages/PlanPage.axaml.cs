@@ -99,6 +99,8 @@ public partial class PlanPage : UserControl
 
         DaysGrid.AddHandler(InputElement.SwipeGestureEndedEvent, (object? sender, SwipeGestureEndedEventArgs args) =>
         {
+            if (Math.Abs(args.Velocity.Y) > 20) return;
+            
             if (args.Velocity.X < 0)
             {
                 if(!isSingleColumn) ShowPrevWeek(sender, args);
