@@ -10,13 +10,21 @@ iOS and Web-Assembly projects are available, but aren't tested.
 
 
 ## Features
+- List of classes with pin function
 - Viewing of plans
 - Portrait / landscape support
 - Filtering of subjects
 - Custom colors for subjects
 
-# **Security Warning**
-This app stores username and password in plain text on your local storage, meaning everything / everyone with access to your device's file system will be able to read your login information.
+## Security Warning
+Every Version before Alpha v0.3 stores Login Information in plain text on your device.
+
+## Security
+|  | Windows | Linux | Android |
+| --- | --- | --- | --- | 
+| Encrypted? | ✅ | ✅ | ✅ | 
+| Using | [SIL.PasswordStore](https://github.com/sillsdev/SIL.PasswordStore) | [SIL.PasswordStore](https://github.com/sillsdev/SIL.PasswordStore) | [SecureStorage](https://github.com/sameerkapps/SecureStorage)
+
 
 ## Gallery
 ![Mobile View](https://i.imgur.com/rQGKaGP.jpeg)
