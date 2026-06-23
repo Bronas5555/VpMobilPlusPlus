@@ -1,6 +1,6 @@
 using System;
-using Meziantou.Framework.Win32;
 using Plugin.SecureStorage;
+using SIL.Secrets;
 
 namespace VpMobilPlusPlus.Saving;
 
@@ -9,13 +9,14 @@ public class SecureStorage
     private static readonly string SecureStorageSchoolNumber = "schoolNumber";
     private static readonly string SecureStorageUsername = "username";
     private static readonly string SecureStoragePassword = "password";
+    private static readonly string AppName = "VpMobilPlusPlus";
     
     public static bool SaveCredentials(int schoolNumber, string username, string password)
     {
-        if (OperatingSystem.IsLinux()) return SaveCredentialsLinux();
+        if (OperatingSystem.IsLinux()) return SaveCredentialsDesktop(schoolNumber, username, password);
         
         if (OperatingSystem.IsWindows() && OperatingSystem.IsWindowsVersionAtLeast(5, 1, 2600))
-            return SaveCredentialsWindows(schoolNumber, username, password);
+            return SaveCredentialsDesktop(schoolNumber, username, password);
         
         if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS()) return SaveCredentialsMobile(schoolNumber, username, password);
 
@@ -24,10 +25,9 @@ public class SecureStorage
 
     public static CredentialData? LoadCredentials()
     {
-        if (OperatingSystem.IsLinux()) return LoadCredentialsLinux();
+        if (OperatingSystem.IsLinux()) return LoadCredentialsDesktop();
 
-        if (OperatingSystem.IsWindows() && OperatingSystem.IsWindowsVersionAtLeast(5, 1, 2600))
-            return LoadCredentialsWindows();
+        if (OperatingSystem.IsWindows()) return LoadCredentialsDesktop();
 
         if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS()) return LoadCredentialsMobile();
         return null;
@@ -46,16 +46,20 @@ public class SecureStorage
         }
         return null;
     }
+    
 
-    private static CredentialData? LoadCredentialsWindows()
+    private static CredentialData? LoadCredentialsDesktop()
     {
-
-        return null;
-    }
-
-    private static CredentialData? LoadCredentialsLinux()
-    {
-        
+        string? secureString = PasswordStore.GetPassword(AppName, AppName);
+        if (secureString != null)
+        {
+            string[] split = secureString.Split(':');
+            
+            string username = split[0];
+            string password = split[1];
+            string schoolNumber = split[2];
+            return new CredentialData(username, password, int.Parse(schoolNumber));
+        }
         return null;
     }
     
@@ -69,21 +73,19 @@ public class SecureStorage
         return nmb && name && pwd;
     }
     
-    private static bool SaveCredentialsWindows(int schoolNumber, string username, string password)
+    private static bool SaveCredentialsDesktop(int schoolNumber, string username, string password)
     {
-        if (!OperatingSystem.IsWindows() || !OperatingSystem.IsWindowsVersionAtLeast(5, 1, 2600)) return false;
-        CredentialManager.WriteCredential(
-            "VpMobilPlusPlus",
-            username,
-            password + ":" + schoolNumber,
-            persistence: CredentialPersistence.LocalMachine);
-        return false;
-    }
-    
-    private static bool SaveCredentialsLinux()
-    {
-
-        return false;
+        try
+        {
+            Console.WriteLine("Saving Credentials Desktop");
+            PasswordStore.SetPassword(AppName, AppName, username + ":" + password + ":" + schoolNumber);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;
+        }
     }
 }
 

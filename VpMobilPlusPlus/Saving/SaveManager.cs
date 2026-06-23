@@ -1,16 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Security;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Security.Cryptography;
-using Avalonia;
 using Avalonia.Media;
-using Meziantou.Framework.Win32;
-using Plugin.SecureStorage;
-using Plugin.SecureStorage.Abstractions;
 using VpMobilPlusPlus.UserControls.Pages;
 
 namespace VpMobilPlusPlus.Saving;
@@ -24,7 +17,7 @@ public static class SaveManager
     public static string username = "";
     public static string password = "";
 
-    private static readonly string appFolderName = "VpMobilPlusPlus";
+    private static readonly string AppName = "VpMobilPlusPlus";
     private static readonly string fileName = "settings.json";
     
     private static bool hasLoaded = false;
@@ -48,7 +41,7 @@ public static class SaveManager
 
         string settingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        string appFolder = Path.Combine(settingsFolder, appFolderName);
+        string appFolder = Path.Combine(settingsFolder, AppName);
         Directory.CreateDirectory(appFolder);
 
         string saveFile = Path.Combine(appFolder, fileName);
@@ -103,7 +96,7 @@ public static class SaveManager
     public static async Task LoadAsync()
     {
         string settingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        string appFolder = Path.Combine(settingsFolder, appFolderName);
+        string appFolder = Path.Combine(settingsFolder, AppName);
 
         string settings = Path.Combine(appFolder, fileName);
 
