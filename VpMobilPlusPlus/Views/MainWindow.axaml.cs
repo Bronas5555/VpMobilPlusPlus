@@ -18,8 +18,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Instance = this;
-        //SaveManager.Load();
         _ = SaveManager.LoadAsync();
+
         PlanPage.LoadWeekByDateAndClass(new DateOnly(2026,6, 7), 0);
         this.PropertyChanged += Window_PropertyChanged;
     }
