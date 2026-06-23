@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -34,6 +35,13 @@ public partial class PlanPage : UserControl
     {
         InitializeComponent();
         Instance = this;
+
+        DayOfWeek dow = DayOfWeek.Saturday;
+        //int dayOfWeek = (int)(DateTime.Now.DayOfWeek + 6) % 7;
+        int dayOfWeek = (int)(dow + 6) % 7;
+        if (dayOfWeek >= 5) dayOfWeek = 0;
+        
+        singleColumnDayOffset = dayOfWeek;
 
         PrevButton.Click += (sender, args) =>
         {

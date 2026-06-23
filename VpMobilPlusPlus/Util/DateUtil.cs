@@ -29,6 +29,11 @@ public class DateUtil
     public static DateOnly GetCurrentWeeksMonday()
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+        
+        if (today.DayOfWeek == DayOfWeek.Saturday || today.DayOfWeek == DayOfWeek.Sunday)
+        {
+            today = today.AddDays(7);
+        }
 
         // ISO 8601 style: Monday = 1, Sunday = 7
         int diff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;

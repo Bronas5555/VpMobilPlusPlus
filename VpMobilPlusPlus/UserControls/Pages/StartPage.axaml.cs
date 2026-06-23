@@ -157,8 +157,7 @@ public partial class StartPage : UserControl
         {
             SaveManager.ClassList.Add(new ClassSelectionSaveElement(element.ClassNameBlock.Text, true));
         }
-
-        //SaveManager.Save();
+        
         _ = SaveManager.SaveAsync();
     }
 }
