@@ -35,10 +35,8 @@ public partial class PlanPage : UserControl
     {
         InitializeComponent();
         Instance = this;
-
-        DayOfWeek dow = DayOfWeek.Saturday;
-        //int dayOfWeek = (int)(DateTime.Now.DayOfWeek + 6) % 7;
-        int dayOfWeek = (int)(dow + 6) % 7;
+        
+        int dayOfWeek = (int)(DateTime.Now.DayOfWeek + 6) % 7;
         if (dayOfWeek >= 5) dayOfWeek = 0;
         
         singleColumnDayOffset = dayOfWeek;
