@@ -2,8 +2,11 @@ using System;
 using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using VpMobilPlusPlus.Saving;
 using VpMobilPlusPlus.UserControls.Pages;
+using VpMobilPlusPlus.Util;
 
 namespace VpMobilPlusPlus.Views;
 
@@ -22,6 +25,8 @@ public partial class MainWindow : Window
 
         PlanPage.LoadWeekByDateAndClass(new DateOnly(2026,6, 7), 0);
         this.PropertyChanged += Window_PropertyChanged;
+        
+        
     }
 
     private void Window_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
@@ -31,12 +36,8 @@ public partial class MainWindow : Window
         {
             Size size = this.ClientSize;
             PlanPage.UpdateViewState(size);
+            DeviceResolution.Raise((int)size.Width, (int)size.Height);
         }
-    }
-
-    public static Size GetMainWindowSize()
-    {
-        return Instance.ClientSize;
     }
 
     public static void DisplayPage(UiPages page)

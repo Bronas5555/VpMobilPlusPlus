@@ -12,6 +12,7 @@ using Avalonia.Input.GestureRecognizers;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
 using VpMobilPlusPlus.UserControls.Controls;
 using VpMobilPlusPlus.Util;
 using VpMobilPlusPlus.Views;
@@ -27,6 +28,7 @@ public partial class PlanPage : UserControl
     public int _curClassIndex;
     private List<CourseAndTeacher> _courses = new List<CourseAndTeacher>();
     public bool isSingleColumn = false;
+    public bool isPopupOpen = false;
 
     private double width = -1;
     private double height = -1;
@@ -57,6 +59,7 @@ public partial class PlanPage : UserControl
                     ShowPrevWeek(sender, args);
                 }
             }
+            ClosePopUp();
         };
 
         NextButton.Click += (sender, args) =>
@@ -75,6 +78,7 @@ public partial class PlanPage : UserControl
                     ShowNextWeek(sender, args);
                 }
             }
+            ClosePopUp();
         };
 
         LayoutUpdated += (sender, args) =>
@@ -99,8 +103,8 @@ public partial class PlanPage : UserControl
 
         DeviceResolution.Changed += (width, height) =>
         {
-            UpdateViewState(new Size(width, height)); 
-            
+            UpdateViewState(new Size(width, height));
+            RepositionPopUp();
         };
 
         DaysGrid.AddHandler(InputElement.SwipeGestureEndedEvent, (object? sender, SwipeGestureEndedEventArgs args) =>
@@ -279,7 +283,61 @@ public partial class PlanPage : UserControl
             CourseColorSelectionPage.UpdateLayout();
         }
     }
+
+    public static void ShowPopUp(string text)
+    {
+        if (Instance.PopupCanvas.IsVisible)
+        {
+            if (Instance.PopupTextBlock.Text == text)
+            {
+                ClosePopUp();
+            }
+            else
+            {
+                Instance.PopupTextBlock.Text = text;
+                Instance.isPopupOpen = true;
+            }
+        }
+        else
+        {
+            Instance.PopupCanvas.IsVisible = true;
+            Instance.PopupTextBlock.Text = text;
+            Instance.isPopupOpen = true;
+        }
+        
+        RepositionPopUp();
+    }
+
+    public static bool EvaluatePopupClosingOfClick(Point point)
+    {
+        if(!Instance.PopupBorder.Bounds.Contains(point) && Instance.isPopupOpen)
+        {
+            ClosePopUp();
+            return true;
+        }
+
+        return false;
+    }
     
+    public static void ClosePopUp()
+    {
+        Instance.PopupCanvas.IsVisible = false;
+        Instance.isPopupOpen = false;
+    }
+
+    private static void RepositionPopUp()
+    {
+        Instance.PopupBorder.Width = Math.Sqrt(DeviceResolution.CurrentResolution.Width) * 15f;
+        Instance.PopupBorder.Height = Math.Sqrt(DeviceResolution.CurrentResolution.Height) * 15f;
+
+        Instance.BackgroundBorder.Width = DeviceResolution.CurrentResolution.Width;
+        Instance.BackgroundBorder.Height = DeviceResolution.CurrentResolution.Height;
+        
+        Canvas.SetLeft(Instance.PopupBorder, 
+            (DeviceResolution.CurrentResolution.Width / 2f) - (Instance.PopupBorder.Width / 2f));
+        Canvas.SetTop(Instance.PopupBorder,
+            (DeviceResolution.CurrentResolution.Height / 2f) - (Instance.PopupBorder.Height / 2f));
+    }
 }
 
 public class CourseAndTeacher

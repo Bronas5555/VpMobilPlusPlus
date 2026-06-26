@@ -7,12 +7,21 @@
              x:Class="VpMobilPlusPlus.UserControls.Controls.DayPlan">
     <Border BorderBrush="White" BorderThickness="1" CornerRadius="4">
         <DockPanel>
-            <Border DockPanel.Dock="Top" Background="DimGray">
-                <TextBlock 
-                    Margin="5"
-                    Text="" 
-                    HorizontalAlignment="Center"
-                    Name="DateBlock"></TextBlock>
+            <Border DockPanel.Dock="Top" Background="DimGray" CornerRadius="4">
+                <DockPanel>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Text="" 
+                        HorizontalAlignment="Center"
+                        Name="DateBlock"></TextBlock>
+                    <Button
+                        Name="InfoButton"
+                        IsVisible="False"
+                        Margin="5"
+                        DockPanel.Dock="Right"
+                        HorizontalAlignment="Right">Info</Button>
+                </DockPanel>
             </Border>
             
             <Grid RowDefinitions="*, *, *, *, *, *" Name="CourseList">

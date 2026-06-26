@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using VpMobilPlusPlus.UserControls.Pages;
 using VpMobilPlusPlus.Util;
 using VpMobilPlusPlus.VpAPI;
@@ -21,7 +22,6 @@ public partial class DayPlan : UserControl
     public DayPlan(Task<VPlan?> vplan, int classIndex)
     {
         InitializeComponent();
-        //TODO: Make Loading animation
 
         if (vplan == null) return;
         
@@ -29,9 +29,26 @@ public partial class DayPlan : UserControl
         {
             Dispatcher.UIThread.Post(() =>
             {
-                Console.WriteLine("Async!");
                 if (t.Result == null) return;
                 DateBlock.Text = t.Result.planDate.ToString("dddd, dd. MM.");
+
+                if (t.Result.plan.ZusatzInfo != null &&
+                    t.Result.plan.ZusatzInfo.ZiZeile != null &&
+                    t.Result.plan.ZusatzInfo.ZiZeile.Count > 0)
+                {
+                    InfoButton.IsVisible = true;
+                    InfoButton.Click += (sender, args) =>
+                    {
+                        string text = "";
+
+                        foreach (var info in t.Result.plan.ZusatzInfo.ZiZeile)
+                        {
+                            text += info + "\n";
+                        }
+                        
+                        PlanPage.ShowPopUp(text);
+                    };
+                }
 
                 int i = 0;
                 foreach (var std in t.Result.plan.Klassen.Kl[classIndex].Pl.Std)
@@ -62,7 +79,7 @@ public partial class DayPlan : UserControl
                     CourseList.Children.Add(course);
                     i++;
                 }
-        
+                
                 CourseList.RowDefinitions = new RowDefinitions(AvaloniaUtil.GridDefinitionStringMaxSize(CourseList.Children.Count));
             });
         });

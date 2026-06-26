@@ -48,5 +48,36 @@
             Grid.Row="2" 
             DockPanel.Dock="Bottom"
             VerticalAlignment="Bottom"></localControls:ToolBar>
+        
+        <Canvas 
+            Grid.Row="0"
+            Name="PopupCanvas"
+            IsVisible="False"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Border
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Background="#80000000"
+                Name="BackgroundBorder">
+                <Border
+                    CornerRadius="4"
+                    Name="PopupBorder"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="300"
+                    Height="150"
+                    Background="#C9000000">
+                    <TextBlock
+                        Margin="11"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        Name="PopupTextBlock"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"></TextBlock>
+                </Border>
+            </Border>
+            
+        </Canvas>
     </Grid>
 </UserControl>

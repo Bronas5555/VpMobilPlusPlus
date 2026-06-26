@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.Content.Res;
+using Android.OS;
 using Avalonia;
 using Avalonia.Android;
 using VpMobilPlusPlus.Util;
@@ -20,10 +21,23 @@ public class MainActivity : AvaloniaMainActivity
     {
         base.OnConfigurationChanged(newConfig);
 
-        var metrics = Resources!.DisplayMetrics;
+        RaiseDeviceResolution();
+    }
 
-        var width = metrics.WidthPixels;
-        var height = metrics.HeightPixels;
+    protected override void OnCreate(Bundle? savedInstanceState)
+    {
+        base.OnCreate(savedInstanceState);
+        RaiseDeviceResolution();
+    }
+
+    private void RaiseDeviceResolution()
+    {
+        var metrics = Resources!.DisplayMetrics;
+        
+        float density = metrics.Density;
+
+        int width = (int)(metrics.WidthPixels / density);
+        int height = (int)(metrics.HeightPixels / density);
 
         DeviceResolution.Raise(width, height);
     }
