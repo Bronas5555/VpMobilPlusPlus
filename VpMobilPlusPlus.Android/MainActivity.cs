@@ -2,6 +2,8 @@
 using Android.App;
 using Android.Content.PM;
 using Android.Content.Res;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Avalonia;
 using Avalonia.Android;
@@ -28,6 +30,8 @@ public class MainActivity : AvaloniaMainActivity
     {
         base.OnCreate(savedInstanceState);
         RaiseDeviceResolution();
+        
+        Window.SetBackgroundDrawable(new ColorDrawable(Color.Black));
     }
 
     private void RaiseDeviceResolution()
