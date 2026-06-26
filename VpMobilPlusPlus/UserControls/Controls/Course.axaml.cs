@@ -50,6 +50,7 @@ public partial class Course : UserControl
         CourseRoomBlock.Text = roomname;
 
         if (CourseColorSelectionPage.courseColors.ContainsKey(PlanPage.Instance._curClassIndex) &&
+            CourseNameBlock.Text != null &&
            CourseColorSelectionPage.courseColors[PlanPage.Instance._curClassIndex].ContainsKey(CourseNameBlock.Text))
         {
             Color color = CourseColorSelectionPage.courseColors[PlanPage.Instance._curClassIndex][CourseNameBlock.Text];
