@@ -96,8 +96,6 @@ public partial class PlanPage : UserControl
             {
                 var size = topLevel.Bounds.Size;
 
-
-
                 if (width != size.Width || height != size.Height)
                 {
                     width = size.Width;
@@ -249,6 +247,7 @@ public partial class PlanPage : UserControl
 
     public static void ReloadCurrentWeek()
     {
+        Instance.DaysGrid.Children.Clear();
         LoadWeekByDateAndClass(Instance._curWeek, Instance._curClassIndex);
     }
 
