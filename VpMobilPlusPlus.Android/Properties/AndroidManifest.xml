@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application 
-		android:label="VpMobilPlusPlus" android:icon="@drawable/Icon" 
+		android:label="VpMobil++" android:icon="@drawable/VpIcon" 
 		android:networkSecurityConfig="@xml/network_security_config"
 	/>
 	

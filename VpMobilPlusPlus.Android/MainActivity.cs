@@ -12,9 +12,9 @@ using VpMobilPlusPlus.Util;
 namespace VpMobilPlusPlus.Android;
 
 [Activity(
-    Label = "VpMobilPlusPlus.Android",
+    Label = "VpMobil++",
     Theme = "@style/MyTheme.NoActionBar",
-    Icon = "@drawable/icon",
+    Icon = "@drawable/VpIcon",
     MainLauncher = true,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 public class MainActivity : AvaloniaMainActivity

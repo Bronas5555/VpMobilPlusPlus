@@ -26,4 +26,16 @@
     <ItemGroup>
         <ProjectReference Include="..\VpMobilPlusPlus\VpMobilPlusPlus.csproj"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <AndroidResource Include="Resources\drawable\VpIcon.png">
+          <Link>Resources\drawable\VpIcon.png</Link>
+      </AndroidResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AndroidResource Include="Resources\drawable\VpIcon_Wide.png">
+              <Link>Resources\drawable\VpIconWide.png</Link>
+      </AndroidResource>
+    </ItemGroup>
 </Project>
