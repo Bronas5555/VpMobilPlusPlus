@@ -5,8 +5,14 @@
              xmlns:localControls="clr-namespace:VpMobilPlusPlus.UserControls.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VpMobilPlusPlus.UserControls.Pages.StartPage">
-    <DockPanel Margin="5">
-        <Grid DockPanel.Dock="Top" ColumnDefinitions="*, Auto">
+    <Grid 
+        Margin="5"
+        RowDefinitions="Auto, *"
+        ColumnDefinitions="*">
+        <Grid
+            DockPanel.Dock="Top" 
+            ColumnDefinitions="*, Auto"
+            Grid.Row="0">
             <TextBlock Grid.Column="0" 
                 Text="VpMobil++"
                 FontSize="32"
@@ -19,10 +25,15 @@
                 Name="SettingsButton">Settings</Button>
         </Grid>
         
-        <ScrollViewer Width="350" HorizontalAlignment="Left">
-            <StackPanel Name="ClassList" Margin="12">
+        <ScrollViewer
+            Grid.Row="1"
+            HorizontalAlignment="Stretch">
+            <StackPanel 
+                Name="ClassList" 
+                Margin="12"
+                HorizontalAlignment="Stretch">
                 
             </StackPanel>
         </ScrollViewer>
-    </DockPanel>
+    </Grid>
 </UserControl>
