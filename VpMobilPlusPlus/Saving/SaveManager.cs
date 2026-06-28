@@ -158,10 +158,10 @@ public static class SaveManager
         SettingsPage.Instance.SchoolNumberBox.Text = data.SchoolNumber.ToString();
         SettingsPage.Instance.UserNameBox.Text = data.Username;
         SettingsPage.Instance.PasswordBox.Text = data.Password;
+        
+        hasLoaded = true;
 
         _ = StartPage.Instance.LoadAsync();
-
-        hasLoaded = true;
     }
 
     public static int GetSchoolNumber()

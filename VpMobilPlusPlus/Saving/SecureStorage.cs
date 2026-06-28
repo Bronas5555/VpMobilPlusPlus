@@ -42,6 +42,8 @@ public class SecureStorage
             string securePassword = CrossSecureStorage.Current.GetValue(SecureStoragePassword);
             
             Console.WriteLine("Loaded Secure Storage Mobile");
+
+            if (secureSchoolNumber == null || secureUsername == null || securePassword == null) return null;
             return new CredentialData(secureUsername, securePassword, int.Parse(secureSchoolNumber));
         }
         return null;

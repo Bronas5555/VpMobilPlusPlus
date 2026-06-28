@@ -24,7 +24,10 @@ public partial class PlanPage : UserControl
 {
     public static PlanPage Instance;
     private DateOnly _curWeek;
+    
     private int singleColumnDayOffset = 0;
+    private int singleColumnDayOffsetOld = 0;
+    
     public int _curClassIndex;
     private List<CourseAndTeacher> _courses = new List<CourseAndTeacher>();
     public bool isSingleColumn = false;
@@ -50,11 +53,13 @@ public partial class PlanPage : UserControl
             {
                 if (singleColumnDayOffset > 0)
                 {
+                    singleColumnDayOffsetOld = singleColumnDayOffset;
                     singleColumnDayOffset -= 1;
                     LoadWeekByDateAndClass(_curWeek, _curClassIndex);
                 }
                 else
                 {
+                    singleColumnDayOffsetOld = singleColumnDayOffset;
                     singleColumnDayOffset = 4;
                     ShowPrevWeek(sender, args);
                 }
@@ -69,11 +74,13 @@ public partial class PlanPage : UserControl
             {
                 if (singleColumnDayOffset < 4)
                 {
+                    singleColumnDayOffsetOld = singleColumnDayOffset;
                     singleColumnDayOffset += 1;
                     LoadWeekByDateAndClass(_curWeek, _curClassIndex);
                 }
                 else
                 {
+                    singleColumnDayOffsetOld = singleColumnDayOffset;
                     singleColumnDayOffset = 0;
                     ShowNextWeek(sender, args);
                 }
@@ -118,11 +125,13 @@ public partial class PlanPage : UserControl
                 {
                     if (singleColumnDayOffset > 0)
                     {
+                        singleColumnDayOffsetOld = singleColumnDayOffset;
                         singleColumnDayOffset -= 1;
                         LoadWeekByDateAndClass(_curWeek, _curClassIndex);
                     }
                     else
                     {
+                        singleColumnDayOffsetOld = singleColumnDayOffset;
                         singleColumnDayOffset = 4;
                         ShowPrevWeek(sender, args);
                     }
@@ -135,11 +144,13 @@ public partial class PlanPage : UserControl
                 {
                     if (singleColumnDayOffset < 4)
                     {
+                        singleColumnDayOffsetOld = singleColumnDayOffset;
                         singleColumnDayOffset += 1;
                         LoadWeekByDateAndClass(_curWeek, _curClassIndex);
                     }
                     else
                     {
+                        singleColumnDayOffsetOld = singleColumnDayOffset;
                         singleColumnDayOffset = 0;
                         ShowNextWeek(sender, args);
                     }
@@ -153,32 +164,43 @@ public partial class PlanPage : UserControl
         Instance._curWeek = DateUtil.GetDatesMonday(date);
         Instance._curClassIndex = classIndex;
         
-        Instance.DaysGrid.Children.Clear();
+        //Instance.DaysGrid.Children.Clear();
         
         if (Instance.isSingleColumn)
         {
             DateOnly d = Instance._curWeek.AddDays(Instance.singleColumnDayOffset); 
             Task<VPlan?> vplan = PlanProvider.GetDate(d);
+            
             if (vplan != null)
             {
-                DayPlan day = new DayPlan(vplan, classIndex);
-            
-                Grid.SetColumn(day, 0);
-                Instance.DaysGrid.Children.Add(day);
-
                 vplan.ContinueWith((Task<VPlan> t) =>
                 {
                     Dispatcher.UIThread.Post(() =>
                     {
-                        if (t.Result == null) return;
+                        if (t.Result == null)
+                        {
+                            Instance.singleColumnDayOffset = Instance.singleColumnDayOffsetOld;
+                            ShowPopUp("404 Plan not Found.");
+                            return;
+                        }
+                        
+                        Instance.DaysGrid.Children.Clear();
                         UpdateCourses(t.Result, classIndex);
+                        
+                        DayPlan day = new DayPlan(vplan, classIndex);
+                        
+                        Grid.SetColumn(day, 0);
+                        Instance.DaysGrid.Children.Add(day);
+                        
                         Instance.UpdateWeekAndClassInfo(t.Result, classIndex);
                     });
                 });
+                
             }
         }
         else
         {
+            Instance.DaysGrid.Children.Clear();
             for (int i = 0; i < 5; i++)
             {
                 DateOnly d = Instance._curWeek.AddDays(i);
