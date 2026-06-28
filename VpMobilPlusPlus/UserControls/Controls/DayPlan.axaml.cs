@@ -29,7 +29,20 @@ public partial class DayPlan : UserControl
         {
             Dispatcher.UIThread.Post(() =>
             {
-                if (t.Result == null) return;
+                if (t.Result == null)
+                {
+                    TextBlock notFoundBlock = new TextBlock();
+                    notFoundBlock.Text = "404 Plan not Found";
+                    notFoundBlock.Margin = new Thickness(5);
+                    notFoundBlock.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+                    notFoundBlock.FontSize = 20;
+                    notFoundBlock.Foreground = Brushes.Red;
+                    
+                    CourseList.Children.Add(notFoundBlock);
+
+                    CourseList.RowDefinitions = new RowDefinitions("*");
+                    return;
+                }
                 DateBlock.Text = t.Result.planDate.ToString("dddd, dd. MM.");
 
                 if (t.Result.plan.ZusatzInfo != null &&
